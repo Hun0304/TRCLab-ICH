@@ -1,0 +1,28 @@
+version: '3'
+services:
+###########################
+#        Template         #
+###########################
+#  template_app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - templated_depend_app
+#    environment: []
+#    volumes: []
+#    ports: []
+#
+#  template_depend_app:
+#    image: templated_depend_app
+#    environment: []
+#    volumes: []
+#    ports: []
+  trclab-ich:
+    container_name: trclab_ich_mkf
+    image: trclab-ich-runtime:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
