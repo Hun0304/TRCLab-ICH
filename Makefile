@@ -8,6 +8,7 @@ include $(cnf)
 ########################
 #     Detected OS      #
 ########################
+WORKING_DIR := $(shell pwd)
 ifeq ($(OS), Windows_NT)
 	DETECTED_OS := Windows
 else
@@ -29,6 +30,7 @@ CONTAINER_ID := $(shell docker ps -qf "name=$(CONTAINER_NAME)")
 #     Display Info     #
 ########################
 $(info ========== Info ==========)
+$(info Working Directory: $(WORKING_DIR))
 $(info Detected OS: $(DETECTED_OS))
 $(info ContainerID: $(CONTAINER_ID))
 $(info Image Name: $(IMAGE_NAME))
@@ -64,6 +66,9 @@ rebuild:  ## Build docker runtime without cache
 run-dev: ## Start dev runtime
 	docker run --name $(CONTAINER_NAME) --rm -it $(IMAGE_NAME):$(IMAGE_VERSION)
 
-
 commit-dev: ## Commit current container status
 	docker commit $(CONTAINER_ID) $(IMAGE_NAME):$(IMAGE_VERSION)
+
+tox:
+	docker run --rm -it -v $(WORKING_DIR):/TRCLab/ICH $(IMAGE_NAME):$(IMAGE_VERSION) tox
+
