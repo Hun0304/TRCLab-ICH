@@ -1,8 +1,1 @@
 # TRCLab-ICH
-腦出血
-
-TESTPR
-
-TEST PRPR
-
-IUIU
