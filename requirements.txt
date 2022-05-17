@@ -1,2 +1,7 @@
 tox_conda
 pytest
+pydicom
+segmentation-models-pytorch
+numpy
+opencv-python-headless
+matplotlib
