@@ -122,6 +122,9 @@ pip-selfcheck.json
 *.hdp
 *.wdp
 
+# Dicom
+*.dcm
+
 # Graphics Interchange Format
 *.gif
 
@@ -365,4 +368,4 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-awk.exe
+resources/
