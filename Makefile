@@ -2,21 +2,17 @@
 #       Load Env       #
 ########################
 cnf ?= config.env
-argv ?= ""
 include $(cnf)
 
 ########################
 #     Detected OS      #
 ########################
-WORKING_DIR := $(shell pwd)
 ifeq ($(OS), Windows_NT)
 	DETECTED_OS := Windows
+	WORKING_DIR := $(shell cd)
 else
 	DETECTED_OS := $(shell sh -c 'uname -s 2>/dev/null || echo not')
-#	export $(shell sed 's/=.*//' $(cnf))
-#	ifeq ($(DETECTED_OS), Darwin)
-#		# MacOS
-#	endif
+	WORKING_DIR := $(shell pwd)
 endif
 
 
@@ -52,10 +48,10 @@ else
 endif
 
 up:  ## Start Runtime
-	docker compose up
+	docker compose up -d
 
 down:  ## Close Runtime
-	docker compose down
+	docker compose down -d
 
 build:  ## Build docker runtime
 	docker build -t $(IMAGE_NAME):$(IMAGE_VERSION) .
@@ -69,6 +65,5 @@ run-dev: ## Start dev runtime
 commit-dev: ## Commit current container status
 	docker commit $(CONTAINER_ID) $(IMAGE_NAME):$(IMAGE_VERSION)
 
-tox:
-	docker run --rm -it -v $(WORKING_DIR):/TRCLab/ICH $(IMAGE_NAME):$(IMAGE_VERSION) tox
-
+pytest: ## PyTest
+	docker run --name $(CONTAINER_NAME) --rm -it $(IMAGE_NAME):$(IMAGE_VERSION) pytest

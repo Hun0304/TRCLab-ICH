@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
 ###########################
 #        Template         #
@@ -19,7 +19,7 @@ services:
 #    volumes: []
 #    ports: []
   trclab-ich:
-    container_name: trclab_ich_mkf
+    container_name: trclab_ich
     image: trclab-ich-runtime:dev
     build:
       context: .
